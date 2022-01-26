@@ -1,0 +1,21 @@
+name: standard-version-release
+
+description: runs standard-version as-is and pushes changes to origin HEAD
+
+branding:
+  color: blue
+  icon: box
+
+runs:
+  using: composite
+  steps:
+    - run: git config user.name "${{github.actor}}"
+      shell: bash
+    - run: git config user.email "${{github.actor}}@users.noreply.github.com"
+      shell: bash
+
+    - run: npx standard-version
+      shell: bash
+
+    - run: git push origin HEAD --follow-tags
+      shell: bash
