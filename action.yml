@@ -1,4 +1,5 @@
-name: release
+name: release with release-please
+description: "release with release-please"
 
 branding:
   color: blue
