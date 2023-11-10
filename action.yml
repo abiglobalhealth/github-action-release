@@ -1,24 +1,22 @@
-name: standard-version-release
-
-description: runs standard-version as-is and pushes changes to origin HEAD
+name: release
+description: "Automate release PRs with release-please"
 
 branding:
   color: blue
   icon: box
 
-runs:
-  using: composite
-  steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - run: git config user.name "${{github.actor}}"
-      shell: bash
-    - run: git config user.email "${{github.actor}}@users.noreply.github.com"
-      shell: bash
+on:
+  workflow_dispatch:
 
-    - run: npx standard-version
-      shell: bash
+permissions:
+  contents: write
+  pull-requests: write
 
-    - run: git push origin HEAD --follow-tags
-      shell: bash
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3.7.8
+        with:
+          release-type: node
+          token: ${{secrets.GITHUB_TOKEN}}
