@@ -5,7 +5,7 @@ branding:
   icon: box
 
 inputs:
-  AWS_ACCESS_KEY_ID_DEV: { description: dev aws access key id, required: true }
+  GITHUB_TOKEN: { description: github token, required: true }
 
 on:
   workflow_dispatch:
@@ -21,4 +21,4 @@ jobs:
       - uses: google-github-actions/release-please-action@v3.7.8
         with:
           release-type: node
-          token: ${{inputs.AWS_ACCESS_KEY_ID_DEV}}
+          token: ${{inputs.GITHUB_TOKEN}}
